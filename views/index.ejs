@@ -1,0 +1,170 @@
+<div class="fixed-action-btn">
+  <a ref="#" class="btn-floating red btn-large">
+    <i class="large material-icons">add</i>
+  </a>
+   <ul>
+
+        <li><a href="/insert/rest/v1" class="btn-floating green btn-large btn tooltipped" data-position="left" data-tooltip="individual insert"><i 
+         class="large material-icons">content_paste</i></a></li>
+        <li><a href="/uploads/rest/v1" class="btn-floating orange btn-large btn tooltipped" data-position="left" data-tooltip="bulk insert"><i 
+         class="large material-icons">attach_file</i></a></li>
+    </ul>
+</div>
+<div class="row">
+    
+    <div class="input-field col s6">
+      <input id="search" type="text" class="validate">
+      <label for="search">Search here</label>
+    </div>
+  </div>
+<table id="example" class="mdl-data-table">
+    <thead class="table-active">
+      <tr>
+        <th>CustomerID</th>
+        <th>SubscriberName</th>
+        <th>Branch</th>
+        <th>Address</th>
+        <th>MobileNo</th>
+        <th>STBNO</th>
+        <th>SmartCardNo</th>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody>
+      <%for(var i=0;i<data.length;i++){ %>
+      <tr>
+
+        <td>
+          <%=data[i].Customer%>
+        </td>
+        <td>
+          <%=data[i].SubscriberName%>
+        </td>
+        <td>
+          <%=data[i].Branch%>
+        </td>
+        <td>
+          <%=data[i].Address%>
+        </td>
+        <td>
+          <%=data[i].MobileNo%>
+        </td>
+        <td>
+          <%=data[i].STBNO%>
+        </td>
+        <td>
+          <%=data[i].SmartcardNo%>
+        </td>
+        <td><a href="/rest/v1/customer/delete/<%=data[i].Customer%>"><i class="material-icons right" id="delete">delete</i></a><a href="/insert/rest/v1/<%=data[i]._id%>"> <i class="material-icons right">create</i></a>
+        </td>
+      </tr>
+      <%}%>
+
+    </tbody>
+  </table>
+
+  <ul class="pagination" style="text-align: center;">
+    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1);
+    if (i !== 1) { 
+    %>
+    <li class="disabled">
+        <a class="page-link">---</a>
+    </li>
+    <% } %>
+    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+    <% if (i == current) { %>
+    <li class="active">
+        <a class="page-link">
+            <%= i %>
+        </a>
+    </li>
+    <% } else { %>
+    <li>
+        <a href="/rest/v1/customer/<%= i %>" class="page-link">
+            <%= i %>
+        </a>
+    </li>
+    <% } %>
+    <% } %>
+    <!-- <li class="disabled"><a href='/rest/v1/customer/right'><i class="material-icons">chevron_right</i></a></li> -->
+</ul>
+
+  <%- contentFor('script') %>
+  
+  <!-- datatables -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.19/pagination/scrolling.js"></script>
+
+  <script>
+
+    $(document).ready(function () {
+      var oTable=$('#example').DataTable({
+        orderCellsTop: true,
+        fixedHeader: true,
+        "paging":false,
+        "info":false,
+        "sDom":'lrtip',
+        columnDefs: [
+          {
+            targets: [0, 1, 2],
+            className: 'mdl-data-table__cell--non-numeric'
+          }
+        ]
+      });
+
+      $('div #search').on('keyup',function(event){
+        if(event.keyCode==13){
+          var svalue= this.value;
+          $.ajax({
+                url: '/rest/v1/customer/search/',
+                type: 'POST',
+                data: { svalue:svalue},
+                cache: false,
+                success: function (d) {
+                  var html = ``;
+                  if (d.data) {
+                    for (var i = 0; i < d.data.length; i++) {
+                      html += `<tr>
+        <td>
+          ${d.data[i].Customer}
+        </td>
+        <td>
+          ${d.data[i].SubscriberName}
+        </td>
+        <td>
+          ${d.data[i].Branch}
+        </td>
+        <td>
+          ${d.data[i].Address} 
+        </td>
+        <td>
+          ${d.data[i].MobileNo} 
+        </td>
+        <td>
+          ${d.data[i].STBNO} 
+        </td>
+        <td>
+          ${d.data[i].SmartcardNo} 
+        </td>
+        
+        <td>
+            <td><a href="/rest/v1/customer/delete/${d.data[i].Customer}"><i class="material-icons right" id="delete">delete</i></a><a href="/insert/rest/v1/${d.data[i]._id}"> <i class="material-icons right">create</i></a>
+        </td>
+      </tr>`;
+                    }
+                  }
+                  $('tbody').html(html);
+                }
+              });
+
+        }
+      });
+
+ 
+    $('.fixed-action-btn').floatingActionButton();
+    $('.tooltipped').tooltip();
+
+    });
+   
+ 
+  </script>

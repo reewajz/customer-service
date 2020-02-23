@@ -1,0 +1,46 @@
+<div class="fixed-action-btn">
+  <a ref="#" class="btn-floating red btn-large">
+    <i class="large material-icons">add</i>
+  </a>
+   <ul>
+
+        <li><a href="/insert/rest/v1" class="btn-floating green btn-large btn tooltipped" data-position="left" data-tooltip="individual insert"><i 
+         class="large material-icons">content_paste</i></a></li>
+        <li><a href="/uploads/rest/v1" class="btn-floating orange btn-large btn tooltipped" data-position="left" data-tooltip="bulk insert"><i 
+         class="large material-icons">attach_file</i></a></li>
+    </ul>
+</div>
+  <div class="container">
+    <h4>Page for insert csv file</h4>
+    <font size="4" color="#ff480082">
+      <%= typeof msg!= 'undefined' ? msg:'' %>
+    </font>
+    <div class="row">
+      <form class="col s12" action="/uploads/rest/v1" method="POST" enctype="multipart/form-data">
+
+      <div id="row">
+
+        <div class="row file-field input-field">
+          <div class="file-path-wrapper col s2">
+            <input type="file" name="csvfile" /><br/><br/>
+            <input class="file-path validate" placeholder="insert file here"/>
+          </div>
+        </div>
+      </div>
+               
+        <div class="row">
+          <button class="btn waves-effect waves-light" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <%- contentFor('script') %>
+
+  <script>
+    $(document).ready(function(){
+      $('.tooltipped').tooltip();
+    });
+    </script>

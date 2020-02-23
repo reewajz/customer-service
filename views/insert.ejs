@@ -1,0 +1,80 @@
+<div class="fixed-action-btn">
+  <a ref="#" class="btn-floating red btn-large">
+    <i class="large material-icons">add</i>
+  </a>
+   <ul>
+
+        <li><a href="/insert/rest/v1" class="btn-floating green btn-large btn tooltipped" data-position="left" data-tooltip="individual insert"><i 
+         class="large material-icons">content_paste</i></a></li>
+        <li><a href="/uploads/rest/v1" class="btn-floating orange btn-large btn tooltipped" data-position="left" data-tooltip="bulk insert"><i 
+         class="large material-icons">attach_file</i></a></li>
+    </ul>
+</div>
+  <div class="container">
+    <h4>Insert Individual record</h4>
+    <font size="4" color="#ff480082">
+      <%= typeof msg!= 'undefined' ? msg:'' %>
+    </font>
+    <div class="row">
+      <form class="col s12" action="/insert/rest/v1" method="POST">
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="text" type="text" class="validate" name="Customer" length="150" value="<%= typeof data!= 'undefined' ? data.Customer:''  %>" required/>
+            <label for="" data-error="wrong" data-success="right">CustomerID:</label>
+          </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+              <input id="text" type="text" class="validate" name="SubscriberName" length="150" value="<%= typeof data!= 'undefined' ? data.SubscriberName:'' %>" required/>
+              <label for="" data-error="wrong" data-success="right">SubscriberName:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="text" type="text" class="validate" name="Branch" length="150" value="<%= typeof data!= 'undefined' ? data.Branch:'' %>" required/>
+              <label for="" data-error="wrong" data-success="right">Branch:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="text" type="text" class="validate" name="Address" length="150" value="<%= typeof data!= 'undefined' ? data.Address:'' %>" required/>
+              <label for="" data-error="wrong" data-success="right">Address:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="text" type="text" class="validate" name="MobileNo" length="150" value="<%= typeof data!= 'undefined' ? data.MobileNo:'' %>" required/>
+              <label for="" data-error="wrong" data-success="right">MobileNo:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="text" type="text" class="validate" name="STBNO" length="150" value="<%= typeof data!= 'undefined' ? data.STBNO:'' %>" required/>
+              <label for="" data-error="wrong" data-success="right">STBNO:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="text" type="text" class="validate" name="SmartcardNo" length="150" value="<%= typeof data!= 'undefined' ? data.SmartcardNo:'' %>" required/>
+              <label for="" data-error="wrong" data-success="right">SmartCardNO:</label>
+            </div>
+          </div>
+        <input type="hidden" name="id" value="<%= typeof data!= 'undefined' ? data._id:'' %>">
+
+        <div class="row">
+          <button class="btn waves-effect waves-light" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <%- contentFor('script') %>
+
+  <script>
+  $(document).ready(function(){
+    $('.tooltipped').tooltip();
+  });
+  </script>

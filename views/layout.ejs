@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  
+  <!-- icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" />
+
+  <!-- datatables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+</head>
+
+<body>
+        <nav >
+                <div class="nav-wrapper">
+                  <a href="/rest/v1/customer" class="brand-logo">Home</a>
+                  <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="large material-icons">menu</i></a>
+                  <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/rest/v1/customer">Home</a></li>
+                    <li><a href="/auth/logout">logout</a></li>
+                  </ul>
+                </div>
+                
+              </nav>
+              <ul class="sidenav" id="mobile-demo">
+                    <li><a href="/rest/v1/customer">Home</a></li>
+                    <li><a href="">logout</a></li>
+                  </ul>
+
+
+  <%-body%>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ 
+  <script>
+    $(document).ready(function () {
+    $('.fixed-action-btn').floatingActionButton();
+    $('.sidenav').sidenav();
+    });
+  </script>
+  <%-defineContent('script')%>
+</body>
+
+</html>

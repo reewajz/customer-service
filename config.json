@@ -1,0 +1,8 @@
+{   
+    "SitePort": 4000,
+       "DBURL": "mongodb://megacable:megacable2019@ds123645.mlab.com:23645/megacustomers",
+       "DB": "megacable",
+       "secrete":"this is a sample scerete!"
+       
+   
+   }
