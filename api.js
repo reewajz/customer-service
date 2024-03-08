@@ -11,7 +11,7 @@ app.use(logger('dev'));
 
 
 var checkToken= function(req,res,next){
-    var tempToken='4d983d59b7306d4af66f4144e2d050711415e606';
+    var tempToken='token123';
     Token.findOne({Token:tempToken}).then(result=>{
         if(!result){
             var newt= new Token({
